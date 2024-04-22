@@ -49,6 +49,10 @@ namespace CalculatorLibrary
                     }
                     writer.WriteValue("Divide");
                     break;
+                case "sr":
+                    result = Math.Sqrt(num1);
+                    writer.WriteValue("Divide");
+                    break;
                 // Return text for an incorrect option entry.
                 default:
                     break;

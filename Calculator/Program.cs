@@ -13,6 +13,9 @@ namespace CalculatorProgram
             Console.WriteLine("------------------------\n");
 
             Calculator calculator = new Calculator();
+            int calculatorUsageCount = 0;
+
+            List<string> calculationResults = new List<string>();
             while (!endApp)
             {
                 // Declare variables and set to empty.
@@ -48,9 +51,12 @@ namespace CalculatorProgram
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
+                Console.WriteLine("\tsr - Square root of 1st number");
                 Console.Write("Your option? ");
 
                 string op = Console.ReadLine();
+
+                calculatorUsageCount++;
 
                 try
                 {
@@ -60,16 +66,29 @@ namespace CalculatorProgram
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
                     else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    calculationResults.Add($"Result: {result}");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                 }
 
+                Console.WriteLine($"Calculator has been used {calculatorUsageCount} times");
+                // Iterating over the list
+                Console.WriteLine("All elements:");
+                foreach (string calcResult in calculationResults)
+                {
+                    Console.WriteLine(calcResult);
+                }
                 Console.WriteLine("------------------------\n");
 
                 // Wait for the user to respond before closing.
-                Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue: ");
+                Console.Write("Press 'n' and Enter to close the app, 'x' to clear the current results or press any other key and Enter to continue: ");
+                if (Console.ReadLine() == "x")
+                {
+                    calculationResults.Clear();
+                    Console.WriteLine("You deleted the current list");
+                }
                 if (Console.ReadLine() == "n") endApp = true;
 
                 Console.WriteLine("\n"); // Friendly linespacing.
